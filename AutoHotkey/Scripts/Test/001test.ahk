@@ -1,0 +1,2 @@
+^j::
+  Send, ;hello
