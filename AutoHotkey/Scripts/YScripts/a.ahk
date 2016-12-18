@@ -2,8 +2,7 @@
 ;在打开的资源管理器打开cmd窗口
 #HotkeyInterval 200
 !r::
-	WinGet, winActExe, ProcessName, A 
-	if(InStr(winActExe, "explorer.exe")){
+	if(WinActExeNameContains("explorer.exe")){
 		currentPath := FolderPath() ;替换掉'Address'或者'地址'
 		Run, cmd /s /k pushd %currentPath% ;执行cmd, pushd是改变目录
 	}else{
@@ -13,19 +12,19 @@ Return
 
 ;Alt + c
 ;拷贝当前目录或者当前选中的文件路径
-!c:: 
+!c::
 	if(WinActExeNameContains("explorer.exe")){
 		Clipboard := ""
 		Send, ^c
 		Sleep 50
-		
+
 		if(StrLen(Clipboard) = 0){
 			Clipboard := FolderPath()
 		}
 		Clipboard = %Clipboard%
 		Tooltip %Clipboard%
 		Sleep 200
-		Tooltip 
+		Tooltip
 	}else{
 		Send, !c
 	}
